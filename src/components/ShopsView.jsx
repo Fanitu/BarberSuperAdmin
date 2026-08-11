@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { listShops, createShop, deactivateShop, createShopAdmin } from "../api/shops";
 import styles from "./ShopsView.module.css";
+/* 
+our shoping list component that provide the list of shops and also provide the create shop and deactivate shop and also create admin login for each shop
+*/
 
 const ShopsView = () => {
   const { token } = useAuth();
@@ -29,7 +32,7 @@ const ShopsView = () => {
     setSubmitting(true);
     setError("");
     try {
-      await createShop(token, { name, ownerName, ownerPhone });
+      await createShop({ name, ownerName, ownerPhone });
       setName("");
       setOwnerName("");
       setOwnerPhone("");
@@ -43,7 +46,7 @@ const ShopsView = () => {
 
   const handleDeactivate = async (id) => {
     try {
-      await deactivateShop(token, id);
+      await deactivateShop(id);
       load();
     } catch (err) {
       setError(err.message);
@@ -61,7 +64,7 @@ const ShopsView = () => {
     e.preventDefault();
     setAdminStatus({ type: "", message: "" });
     try {
-      await createShopAdmin(token, shopId, { name: adminName, password: adminPassword });
+      await createShopAdmin(shopId, { name: adminName, password: adminPassword });
       setAdminStatus({ type: "success", message: "Admin account created." });
       setAdminFormShopId(null);
     } catch (err) {

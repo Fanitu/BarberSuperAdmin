@@ -1,16 +1,19 @@
 import request from "./client";
 
-export const listShops = (token) => request("/superadmin/shops", { token });
+// No need to pass tokens anymore - cookies handle authentication
+export const listShops = () => request("/superadmin/shops");
 
-export const createShop = (token, { name, ownerName, ownerPhone }) =>
-  request("/superadmin/shops", { method: "POST", token, body: { name, ownerName, ownerPhone } });
+export const createShop = ({ name, ownerName, ownerPhone }) =>
+  request("/superadmin/shops", { 
+    method: "POST", 
+    body: { name, ownerName, ownerPhone } 
+  });
 
-export const deactivateShop = (token, id) =>
-  request(`/superadmin/shops/${id}/deactivate`, { method: "PATCH", token });
+export const deactivateShop = (id) =>
+  request(`/superadmin/shops/${id}/deactivate`, { method: "PATCH" });
 
-export const createShopAdmin = (token, shopId, { name, password }) =>
+export const createShopAdmin = (shopId, { name, password }) =>
   request(`/superadmin/shops/${shopId}/admins`, {
     method: "POST",
-    token,
     body: { name, password },
   });

@@ -4,12 +4,10 @@ import styles from "./LoginModal.module.css";
 const LoginModal = ({ onClose, onSubmit, error, loading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ email, password });
   };
-
   return (
     <div className={styles.backdrop} onClick={onClose}>
       <div

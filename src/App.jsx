@@ -5,6 +5,13 @@ import LoginModal from "./components/LoginModal";
 import ShopsView from "./components/ShopsView";
 import "./App.css";
 
+/* 
+
+This is our app entry for our frontend and as we get all the data from useAuth and if we get a true value of one of our data
+isAuthenticated from use auth we display the Shops list modal and if false we display them the login modal of super admins UI
+
+*/
+
 function App() {
   const { user, isAuthenticated, login, logout, loginError, loggingIn, clearLoginError } =
     useAuth();
